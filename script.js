@@ -18,6 +18,19 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // NEW: Add event listener for the "Download App" button
+    const downloadAppButton = document.getElementById('downloadAppButton');
+    if (downloadAppButton) {
+        downloadAppButton.addEventListener('click', () => {
+            // Redirect to the React app's main page.
+            // When the user lands on the React app, the browser can then prompt for PWA installation.
+            // IMPORTANT: Replace 'YOUR_GITHUB_PAGES_BASE_URL' with your actual GitHub Pages URL.
+            // E.g., for MOBILE-DOCTOR/pro-calculator, it would be 'https://mobile-doctor.github.io/pro-calculator/my-download-app/'
+            // The '/' at the end is important.
+            window.location.href = 'https://mobile-doctor.github.io/pro-calculator/my-download-app/'; 
+        });
+    }
+
     // Example: Add hover effects to feature items (though most styling is in CSS).
     // This demonstrates basic element selection and event handling.
     const featureItems = document.querySelectorAll('.feature-item');

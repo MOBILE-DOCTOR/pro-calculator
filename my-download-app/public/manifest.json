@@ -1,0 +1,34 @@
+{
+    "name": "Pro Calculator App",
+    "short_name": "ProCalc",
+    "description": "Your professional calculator application.",
+    "start_url": "/pro-calculator/my-download-app/index.html",
+    "display": "standalone",
+    "background_color": "#ffffff",
+    "theme_color": "#4A90E2",
+    "icons": [
+        {
+            "src": "/pro-calculator/my-download-app/icons/icon-192x192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "/pro-calculator/my-download-app/icons/icon-512x512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ],
+    "orientation": "portrait"
+}
+
+IMPORTANT for manifest.json:
+
+start_url: This path is relative to your GitHub Pages root. https://mobile-doctor.github.io/pro-calculator/ is your root. Your React app's index.html is inside my-download-app/dist. So, the URL to reach it is https://mobile-doctor.github.io/pro-calculator/my-download-app/. For the start_url within the manifest, it needs to be relative to the manifest itself if the manifest is in public. Vite will handle moving public content to dist. So, start_url should be /pro-calculator/my-download-app/index.html.
+
+Icons: I've included placeholder paths for icons. You will need to create a new folder named icons inside my-download-app/public/ and place actual icon-192x192.png and icon-512x512.png files there. You can use any generic icons for now. If you don't have them, the PWA might still install, but without an icon.
+
+Example placeholder images you could use:
+
+icon-192x192.png: https://placehold.co/192x192/007bff/ffffff?text=App
+
+icon-512x512.png: https://placehold.co/512x512/007bff/ffffff?text=App

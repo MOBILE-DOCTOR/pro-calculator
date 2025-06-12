@@ -4,10 +4,30 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + React</title>
+    <title>Pro Calculator App</title>
+    <!-- NEW: Link to your PWA manifest.json -->
+    <link rel="manifest" href="/pro-calculator/my-download-app/manifest.json" />
   </head>
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
+    <!-- NEW: Register your service worker -->
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/pro-calculator/my-download-app/service-worker.js')
+            .then(registration => {
+              console.log('Service Worker registered successfully:', registration);
+            })
+            .catch(error => {
+              console.error('Service Worker registration failed:', error);
+            });
+        });
+      }
+    </script>
   </body>
 </html>
+
+IMPORTANT for my-download-app/index.html:
+
+href for manifest and src for service worker: These paths are critical for GitHub Pages. They should be relative to your GitHub Pages base URL. Since your React app is served from https://mobile-doctor.github.io/pro-calculator/my-download-app/, the paths to manifest.json and service-worker.js (which are in the public folder and get copied to the dist root by Vite) need to be /pro-calculator/my-download-app/manifest.json and /pro-calculator/my-download-app/service-worker.js respectively.
