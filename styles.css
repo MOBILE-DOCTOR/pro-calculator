@@ -1,565 +1,200 @@
-* {
+/* Basic CSS for the main site (index.html) */
+
+/* Universal Box Sizing for consistent layout */
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+/* Body and Typography */
+body {
+    font-family: 'Arial', sans-serif; /* Fallback to Arial if specific fonts aren't loaded */
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
-body {
-    background-color: #f0f2f5;
+    line-height: 1.6;
     color: #333;
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
+    background-color: #f4f4f4;
 }
 
-.calculator-container {
-    width: 100%;
-    max-width: 900px;
-    background-color: white;
-    border-radius: 15px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-}
-
+/* Header Styling */
 header {
-    background: linear-gradient(135deg, #6e8efb, #a777e3);
-    color: white;
-    padding: 20px;
+    background-color: #333;
+    color: #fff;
+    padding: 1rem 0;
     text-align: center;
 }
 
 header h1 {
-    font-size: 1.5rem;
+    margin: 0;
+    font-size: 2.5rem;
+}
+
+/* Navigation Styling */
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    gap: 20px; /* Space between nav items */
+}
+
+nav a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+nav a:hover,
+nav a:focus {
+    background-color: #555;
+}
+
+/* Main Content Styling */
+main {
+    padding: 20px;
+    max-width: 960px; /* Constrain content width */
+    margin: 20px auto; /* Center the main content */
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Section Styling */
+section {
+    padding: 40px 0;
+    text-align: center;
+}
+
+section:nth-of-type(even) {
+    background-color: #f9f9f9; /* Light background for alternating sections */
+}
+
+section h2 {
+    color: #007bff;
+    font-size: 2.2rem;
     margin-bottom: 15px;
 }
 
-.mode-selector select {
-    width: 100%;
-    padding: 10px;
+section h3 {
+    color: #007bff;
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+}
+
+/* Hero Section Specifics */
+#hero {
+    background-color: #e2f0ff; /* A soft blue background */
+    padding: 60px 20px;
+    border-radius: 8px;
+    margin-bottom: 30px;
+}
+
+#hero p {
+    font-size: 1.1rem;
+    max-width: 700px;
+    margin: 0 auto 20px;
+}
+
+#hero button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 12px 25px;
+    font-size: 1rem;
     border-radius: 5px;
-    border: none;
-    font-size: 1rem;
-    background-color: rgba(255, 255, 255, 0.2);
-    color: white;
-    -webkit-appearance: none; /* Remove default arrow on select */
-    -moz-appearance: none;
-    appearance: none;
-    background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%20viewBox%3D%220%200%20292.4%20292.4%22%3E%3Cpath%20fill%3D%22%23ffffff%22%20d%3D%22M287%2C197.9c-3.2%2C3.2-7.5%2C5-12.1%2C5s-8.9-1.8-12.1-5L146.2%2C80.7L30.6%2C197.9c-3.2%2C3.2-7.5%2C5-12.1%2C5s-8.9-1.8-12.1-5c-6.6-6.6-6.6-17.4%2C0-24L134.1%2C5c3.2-3.2%2C7.5-5%2C12.1-5s8.9%2C1.8%2C12.1%2C5l123.6%2C123.6C293.6%2C180.5%2C293.6%2C191.3%2C287%2C197.9z%22%2F%3E%3C%2Fsvg%3E');
-    background-repeat: no-repeat;
-    background-position: right 10px top 50%;
-    background-size: 12px;
-    padding-right: 30px;
-}
-
-.mode-selector select option {
-    background-color: #6e8efb;
-    color: white;
-}
-
-.calculator {
-    padding: 20px;
-    display: none; /* Hidden by default */
-}
-
-.display-block {
-    display: block; /* Shown when active */
-}
-
-/* Common display styles for standard and scientific */
-.display {
-    background-color: #222;
-    color: white;
-    padding: 20px;
-    border-radius: 8px;
-    text-align: right;
-    margin-bottom: 20px;
-    overflow-x: auto;
-    font-size: 2.5rem;
-    position: relative;
-    height: 100px;
-}
-
-.display .previous-operand {
-    font-size: 1rem;
-    color: #ccc;
-    height: 20px;
-    margin-bottom: 5px;
-}
-
-.display .current-operand {
-    font-size: 2.5rem;
-    height: 50px;
-    display: flex;
-    align-items: flex-end;
-    justify-content: flex-end;
-    word-break: break-all; /* Allow breaking long numbers */
-}
-
-.buttons {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 10px;
-}
-
-#scientific-calculator .buttons {
-    grid-template-columns: repeat(6, 1fr); /* 6 columns for scientific */
-}
-
-button {
-    background-color: #e0e0e0;
-    border: none;
-    border-radius: 8px;
-    padding: 15px;
-    font-size: 1.2rem;
     cursor: pointer;
-    transition: background-color 0.2s ease, transform 0.1s ease;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-button:hover {
-    background-color: #d0d0d0;
+#hero button:hover {
+    background-color: #0056b3;
     transform: translateY(-2px);
 }
 
-button:active {
-    transform: translateY(0);
-}
-
-button.span-two {
-    grid-column: span 2;
-}
-
-button[data-action="clear"],
-button[data-action="delete"] {
-    background-color: #dc3545;
-    color: white;
-}
-
-button[data-action="clear"]:hover,
-button[data-action="delete"]:hover {
-    background-color: #c82333;
-}
-
-button[data-action="equals"] {
-    background-color: #28a745;
-    color: white;
-}
-
-button[data-action="equals"]:hover {
-    background-color: #218838;
-}
-
-button[data-action="add"],
-button[data-action="subtract"],
-button[data-action="multiply"],
-button[data-action="divide"],
-button[data-action="power"] {
-    background-color: #007bff;
-    color: white;
-}
-
-button[data-action="add"]:hover,
-button[data-action="subtract"]:hover,
-button[data-action="multiply"]:hover,
-button[data-action="divide"]:hover,
-button[data-action="power"]:hover {
-    background-color: #0056b3;
-}
-
-/* Scientific-specific buttons */
-#scientific-calculator button[data-action="sin"],
-#scientific-calculator button[data-action="cos"],
-#scientific-calculator button[data-action="tan"],
-#scientific-calculator button[data-action="asin"],
-#scientific-calculator button[data-action="acos"],
-#scientific-calculator button[data-action="atan"],
-#scientific-calculator button[data-action="log"],
-#scientific-calculator button[data-action="ln"],
-#scientific-calculator button[data-action="sqrt"],
-#scientific-calculator button[data-action="factorial"],
-#scientific-calculator button[data-action="percent"],
-#scientific-calculator button[data-action="plus-minus"],
-#scientific-calculator button[data-action="pi"],
-#scientific-calculator button[data-action="e"],
-#scientific-calculator button[data-action="open-parenthesis"],
-#scientific-calculator button[data-action="close-parenthesis"] {
-    background-color: #6c757d;
-    color: white;
-    font-size: 0.9rem; /* Smaller font for scientific functions */
-}
-
-#scientific-calculator button[data-action="sin"]:hover,
-#scientific-calculator button[data-action="cos"]:hover,
-#scientific-calculator button[data-action="tan"]:hover,
-#scientific-calculator button[data-action="asin"]:hover,
-#scientific-calculator button[data-action="acos"]:hover,
-#scientific-calculator button[data-action="atan"]:hover,
-#scientific-calculator button[data-action="log"]:hover,
-#scientific-calculator button[data-action="ln"]:hover,
-#scientific-calculator button[data-action="sqrt"]:hover,
-#scientific-calculator button[data-action="factorial"]:hover,
-#scientific-calculator button[data-action="percent"]:hover,
-#scientific-calculator button[data-action="plus-minus"]:hover,
-#scientific-calculator button[data-action="pi"]:hover,
-#scientific-calculator button[data-action="e"]:hover,
-#scientific-calculator button[data-action="open-parenthesis"]:hover,
-#scientific-calculator button[data-action="close-parenthesis"]:hover {
-    background-color: #5a6268;
-}
-
-/* Graphing calculator styles */
-.calculator-description {
-    font-size: 0.9rem;
-    color: #666;
-    margin-bottom: 15px;
-    background-color: #e6f7ff; /* Light blue background for info */
-    border-left: 4px solid #007bff;
-    padding: 10px 15px;
-    border-radius: 4px;
-}
-
-.graph-controls {
+/* Features Section Specifics */
+.feature-list {
     display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-bottom: 20px;
-    align-items: center;
+    flex-wrap: wrap; /* Allow items to wrap on smaller screens */
+    justify-content: center;
+    gap: 30px; /* Space between feature items */
+    margin-top: 30px;
 }
 
-.graph-controls input[type="text"],
-.graph-controls input[type="number"] {
-    flex: 1;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    min-width: 80px; /* Allow inputs to shrink */
-}
-
-.graph-controls button {
-    padding: 10px 15px;
-    font-size: 1rem;
-    white-space: nowrap; /* Prevent buttons from wrapping text */
-}
-
-.graph-controls div {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    align-items: center;
-    width: 100%; /* Take full width */
-    margin-top: 10px;
-}
-
-.graph-controls label {
-    font-size: 0.9rem;
-    color: #555;
-    white-space: nowrap;
-}
-
-.graph-container {
-    background-color: #f8f8f8;
+.feature-item {
+    background-color: #fff;
+    border: 1px solid #ddd;
     border-radius: 8px;
-    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.1);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 300px; /* Minimum height for the graph */
-    width: 100%;
-    position: relative; /* For responsiveness */
+    padding: 25px;
+    width: 100%; /* Full width on small screens */
+    max-width: 300px; /* Max width on larger screens */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s ease;
 }
 
-canvas {
-    max-width: 100%;
-    height: auto;
+.feature-item:hover {
+    transform: translateY(-5px);
 }
 
-/* Converter styles (currency and unit) */
-.converter-container {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    background-color: #f8f9fa;
-    border-radius: 10px;
-    padding: 20px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-}
-
-.converter-row {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    align-items: center;
-    justify-content: center;
-}
-
-.converter-row input[type="number"],
-.converter-row select {
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 1rem;
-    flex: 1;
-    min-width: 120px; /* Ensure inputs/selects don't get too small */
-}
-
-.converter-row button {
-    padding: 10px 15px;
-    font-size: 1.2rem;
-    background-color: #6c757d;
-    color: white;
-    border-radius: 5px;
-    border: none;
-    cursor: pointer;
-    transition: background-color 0.2s ease;
-}
-
-.converter-row button:hover {
-    background-color: #5a6268;
-}
-
-.converter-result {
-    text-align: center;
-    padding: 10px;
-    border-top: 1px solid #eee;
-    margin-top: 10px;
-}
-
-.converter-result div {
-    font-size: 1.3rem;
+.feature-item h4 {
     color: #007bff;
-    margin-bottom: 5px;
-}
-
-.converter-result div:last-child {
     font-size: 1.5rem;
-    font-weight: bold;
-    color: #333;
+    margin-top: 0;
 }
 
-/* Financial calculator styles */
-.financial-controls {
-    margin-bottom: 20px;
-}
-
-.financial-controls select {
-    width: 100%;
-    padding: 10px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    font-size: 1rem;
-    margin-bottom: 20px;
-}
-
-.financial-section {
-    background-color: #f8f9fa;
-    border-radius: 10px;
-    padding: 20px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-    margin-top: 20px; /* Space between financial sections */
-}
-
-.financial-section h3 {
-    margin-bottom: 15px;
-    color: #495057;
-    border-bottom: 1px solid #eee;
-    padding-bottom: 10px;
-}
-
-.input-group {
-    margin-bottom: 15px;
-}
-
-.input-group label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
+.feature-item p {
+    font-size: 0.95rem;
     color: #555;
 }
 
-.input-group input[type="number"],
-.input-group select {
-    width: 100%;
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 1rem;
-}
-
-.financial-section button {
-    width: 100%;
-    padding: 12px;
-    background-color: #28a745;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    font-size: 1.1rem;
-    cursor: pointer;
-    transition: background-color 0.2s ease;
-    margin-top: 10px;
-}
-
-.financial-section button:hover {
-    background-color: #218838;
-}
-
-.result-group {
-    margin-top: 20px;
-    padding-top: 15px;
-    border-top: 1px dashed #e9ecef;
-}
-
-.result-group p {
-    font-size: 1.1rem;
-    margin-bottom: 8px;
-    color: #333;
-}
-
-.result-group span {
-    font-weight: bold;
-    color: #007bff;
-}
-
-/* Printing calculator styles */
-.printing-display {
-    background-color: #222;
-    color: white;
-    padding: 15px;
+/* Footer Styling */
+footer {
+    text-align: center;
+    padding: 20px;
+    margin-top: 40px;
+    background-color: #333;
+    color: #fff;
     border-radius: 8px;
-    margin-bottom: 20px;
-    height: 250px; /* Fixed height for the tape */
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end; /* Push current value to bottom */
-    position: relative;
-    overflow: hidden; /* Hide scrollbar for tape */
 }
 
-.printing-tape {
-    flex-grow: 1;
-    overflow-y: auto; /* Enable scrolling for tape */
-    font-family: 'Courier New', monospace;
-    font-size: 0.9rem;
-    color: #ddd;
-    text-align: left;
-    white-space: pre-wrap; /* Preserve whitespace and wrap text */
-    padding-right: 10px; /* Space for potential scrollbar */
-}
-
-.current-printing-value {
-    font-size: 2rem;
-    text-align: right;
-    margin-top: 10px;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    padding-top: 5px;
-    height: 40px; /* Fixed height for current value */
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-}
-
-button[data-action="print-clear-tape"] {
-    background-color: #dc3545;
-    color: white;
-}
-
-button[data-action="print-clear-tape"]:hover {
-    background-color: #bd2130;
-}
-
-button[data-action="print"] {
-    background-color: #17a2b8;
-    color: white;
-}
-
-button[data-action="print"]:hover {
-    background-color: #138496;
-}
-
-/* Online calculators styles */
-.online-calculators-container {
-    width: 100%;
-}
-
-.online-calculators-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 20px;
-}
-
-.online-calc-card {
-    background-color: #f8f9fa;
-    border-radius: 10px;
-    padding: 15px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-}
-
-.online-calc-card h4 {
-    margin-bottom: 15px;
-    color: #495057;
-}
-
-/* Responsive design */
+/* Responsive Adjustments */
 @media (max-width: 768px) {
-    .buttons {
-        gap: 8px;
-    }
-    
-    button {
-        padding: 12px 0;
+    header h1 {
+        font-size: 2rem;
     }
 
-    #scientific-calculator .buttons {
-        grid-template-columns: repeat(4, 1fr); /* Adjust to 4 columns on smaller screens */
-    }
-
-    #scientific-calculator button[data-action="sin"],
-    #scientific-calculator button[data-action="cos"],
-    #scientific-calculator button[data-action="tan"],
-    #scientific-calculator button[data-action="asin"],
-    #scientific-calculator button[data-action="acos"],
-    #scientific-calculator button[data-action="atan"],
-    #scientific-calculator button[data-action="log"],
-    #scientific-calculator button[data-action="ln"],
-    #scientific-calculator button[data-action="sqrt"],
-    #scientific-calculator button[data-action="factorial"],
-    #scientific-calculator button[data-action="percent"],
-    #scientific-calculator button[data-action="plus-minus"],
-    #scientific-calculator button[data-action="pi"],
-    #scientific-calculator button[data-action="e"],
-    #scientific-calculator button[data-action="open-parenthesis"],
-    #scientific-calculator button[data-action="close-parenthesis"] {
-        font-size: 0.75rem; /* Further reduce font size for scientific functions */
-    }
-
-    .graph-controls {
+    nav ul {
         flex-direction: column;
-        align-items: stretch;
+        gap: 10px;
     }
 
-    .graph-controls input,
-    .graph-controls select,
-    .graph-controls button {
-        width: 100%;
+    .feature-item {
+        max-width: 90%; /* Adjust width for better fit on tablets */
     }
+}
 
-    .converter-row {
-        flex-direction: column;
-        align-items: stretch;
-    }
-
-    .converter-row input,
-    .converter-row select {
-        width: 100%;
-    }
-
-    .financial-section {
+@media (max-width: 480px) {
+    main {
+        margin: 10px auto;
         padding: 15px;
     }
 
-    .online-calc-card {
-        padding: 15px;
+    section {
+        padding: 30px 0;
+    }
+
+    header h1 {
+        font-size: 1.8rem;
+    }
+
+    #hero {
+        padding: 40px 15px;
+    }
+
+    .feature-list {
+        flex-direction: column;
+        align-items: center;
     }
 }

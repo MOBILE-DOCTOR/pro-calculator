@@ -3,347 +3,55 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Universal Calculator Pro</title>
+    <title>Your Awesome Site</title>
     <link rel="stylesheet" href="styles.css">
-    <!-- Chart.js for graphing calculator -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <!-- Math.js for advanced calculations -->
-    <script src="https://cdn.jsdelivr.net/npm/mathjs@10.6.0/lib/browser/math.min.js"></script>
+    
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
 </head>
 <body>
-    <div class="calculator-container">
-        <header>
-            <h1>Universal Calculator Pro</h1>
-            <div class="mode-selector">
-                <select id="calculator-mode">
-                    <option value="standard">Standard Calculator</option>
-                    <option value="scientific">Scientific Calculator</option>
-                    <option value="graphing">Graphing Calculator</option>
-                    <option value="currency">Currency Converter</option>
-                    <option value="unit">Unit Converter</option>
-                    <option value="financial">Financial Calculator</option>
-                    <option value="printing">Printing Calculator</option>
-                    <option value="online">Online Calculators</option>
-                </select>
-            </div>
-        </header>
+    <header>
+        <h1>Welcome to My Site!</h1>
+        <nav>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Services</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
 
-        <div id="standard-calculator" class="calculator display-block">
-            <div class="display">
-                <div class="previous-operand"></div>
-                <div class="current-operand">0</div>
-            </div>
-            <div class="buttons">
-                <button class="span-two" data-action="clear">AC</button>
-                <button data-action="delete">DEL</button>
-                <button data-action="divide">/</button>
-                <button data-action="multiply">*</button>
-                <button data-action="number">7</button>
-                <button data-action="number">8</button>
-                <button data-action="number">9</button>
-                <button data-action="subtract">-</button>
-                <button data-action="number">4</button>
-                <button data-action="number">5</button>
-                <button data-action="number">6</button>
-                <button data-action="add">+</button>
-                <button data-action="number">1</button>
-                <button data-action="number">2</button>
-                <button data-action="number">3</button>
-                <button class="span-two" data-action="equals">=</button>
-                <button data-action="number">0</button>
-                <button data-action="decimal">.</button>
-            </div>
-        </div>
+    <main>
+        <section id="hero">
+            <h2>Discover What We Offer</h2>
+            <p>This is the main content area of your traditional website. Users will see this after dismissing the app download prompt.</p>
+            <button>Learn More</button>
+        </section>
 
-        <div id="scientific-calculator" class="calculator">
-            <div class="display">
-                <div class="previous-operand"></div>
-                <div class="current-operand">0</div>
-            </div>
-            <div class="buttons">
-                <button data-action="clear">AC</button>
-                <button data-action="delete">DEL</button>
-                <button data-action="power">x^y</button>
-                <button data-action="sqrt">√</button>
-                <button data-action="percent">%</button>
-                <button data-action="divide">/</button>
-                <button data-action="ln">ln</button>
-                <button data-action="log">log</button>
-                <button data-action="pi">π</button>
-                <button data-action="e">e</button>
-                <button data-action="multiply">*</button>
-                <button data-action="sin">sin</button>
-                <button data-action="cos">cos</button>
-                <button data-action="tan">tan</button>
-                <button data-action="open-parenthesis">(</button>
-                <button data-action="close-parenthesis">)</button>
-                <button data-action="subtract">-</button>
-                <button data-action="asin">sin⁻¹</button>
-                <button data-action="acos">cos⁻¹</button>
-                <button data-action="atan">tan⁻¹</button>
-                <button data-action="factorial">x!</button>
-                <button data-action="add">+</button>
-                <button data-action="number">7</button>
-                <button data-action="number">8</button>
-                <button data-action="number">9</button>
-                <button data-action="equals">=</button>
-                <button data-action="number">4</button>
-                <button data-action="number">5</button>
-                <button data-action="number">6</button>
-                <button data-action="number">1</button>
-                <button data-action="number">2</button>
-                <button data-action="number">3</button>
-                <button data-action="number">0</button>
-                <button data-action="decimal">.</button>
-                <button data-action="plus-minus">±</button>
-            </div>
-        </div>
-
-        <div id="graphing-calculator" class="calculator">
-            <h2>Graphing Calculator</h2>
-            <p class="calculator-description">
-                This graphing calculator supports plotting **explicit functions of 'x'** (e.g., `x^2`, `sin(x)`, `log(x)`, `2*x + 5`).
-                <br>
-                <strong>Supported:</strong> Functions like `x`, `x*x`, `sin(x)`, `cos(x)`, `tan(x)`, `sqrt(x)`, `log(x)`, `exp(x)`.
-                <br>
-                <strong>Not Supported:</strong> Implicit equations (e.g., `x^2 + y^2 = 25`), inequalities (e.g., `y > x + 1`), parametric equations, or complex interactive features like drag-to-pan/zoom.
-            </p>
-            <div class="graph-controls">
-                <input type="text" id="graph-equation" placeholder="Enter function (e.g., x^2, sin(x))">
-                <button id="plot-button">Plot</button>
-                <button id="clear-plot">Clear</button>
-                <div>
-                    <label for="x-min">X min:</label>
-                    <input type="number" id="x-min" value="-10" step="1">
-                    <label for="x-max">X max:</label>
-                    <input type="number" id="x-max" value="10" step="1">
-                    <label for="y-min">Y min:</label>
-                    <input type="number" id="y-min" value="-10" step="1">
-                    <label for="y-max">Y max:</label>
-                    <input type="number" id="y-max" value="10" step="1">
+        <section id="features">
+            <h3>Key Features</h3>
+            <div class="feature-list">
+                <div class="feature-item">
+                    <h4>Feature 1</h4>
+                    <p>Description of feature 1.</p>
+                </div>
+                <div class="feature-item">
+                    <h4>Feature 2</h4>
+                    <p>Description of feature 2.</p>
+                </div>
+                <div class="feature-item">
+                    <h4>Feature 3</h4>
+                    <p>Description of feature 3.</p>
                 </div>
             </div>
-            <div class="graph-container">
-                <canvas id="graph-canvas"></canvas>
-            </div>
-        </div>
+        </section>
 
-        <div id="currency-calculator" class="calculator">
-            <div class="converter-container">
-                <div class="converter-row">
-                    <input type="number" id="amount" value="1" min="0" step="any">
-                    <select id="from-currency">
-                        <option value="USD">USD - US Dollar</option>
-                        <option value="EUR">EUR - Euro</option>
-                        <option value="GBP">GBP - British Pound</option>
-                        <option value="JPY">JPY - Japanese Yen</option>
-                        <option value="AUD">AUD - Australian Dollar</option>
-                        <option value="CAD">CAD - Canadian Dollar</option>
-                        <option value="CHF">CHF - Swiss Franc</option>
-                        <option value="CNY">CNY - Chinese Yuan</option>
-                        <option value="INR">INR - Indian Rupee</option>
-                    </select>
-                    <button id="swap-currencies">↔</button>
-                    <select id="to-currency">
-                        <option value="EUR">EUR - Euro</option>
-                        <option value="USD">USD - US Dollar</option>
-                        <option value="GBP">GBP - British Pound</option>
-                        <option value="JPY">JPY - Japanese Yen</option>
-                        <option value="AUD">AUD - Australian Dollar</option>
-                        <option value="CAD">CAD - Canadian Dollar</option>
-                        <option value="CHF">CHF - Swiss Franc</option>
-                        <option value="CNY">CNY - Chinese Yuan</option>
-                        <option value="INR">INR - Indian Rupee</option>
-                    </select>
-                </div>
-                <div class="converter-result">
-                    <div id="conversion-rate"></div>
-                    <div id="converted-amount"></div>
-                </div>
-                <button id="convert-button">Convert</button>
-            </div>
-        </div>
+        </main>
 
-        <div id="unit-calculator" class="calculator">
-            <div class="converter-container">
-                <div class="converter-row">
-                    <input type="number" id="unit-value" value="1" min="0" step="any">
-                    <select id="from-unit-type">
-                        <option value="length">Length</option>
-                        <option value="weight">Weight</option>
-                        <option value="temperature">Temperature</option>
-                        <option value="area">Area</option>
-                        <option value="volume">Volume</option>
-                        <option value="speed">Speed</option>
-                        <option value="time">Time</option>
-                    </select>
-                    <select id="from-unit">
-                        <!-- Filled by JavaScript based on unit type -->
-                    </select>
-                    <span>to</span>
-                    <select id="to-unit">
-                        <!-- Filled by JavaScript based on unit type -->
-                    </select>
-                </div>
-                <div class="converter-result">
-                    <div id="converted-unit-value"></div>
-                </div>
-                <button id="convert-unit-button">Convert</button>
-            </div>
-        </div>
-
-        <div id="financial-calculator" class="calculator">
-            <div class="financial-controls">
-                <select id="financial-mode">
-                    <option value="loan">Loan Calculator</option>
-                    <option value="compound">Compound Interest</option>
-                    <option value="savings">Savings Goal</option>
-                    <option value="roi">ROI Calculator</option>
-                </select>
-                
-                <div id="loan-calculator" class="financial-section">
-                    <h3>Loan Calculator</h3>
-                    <div class="input-group">
-                        <label for="loan-amount">Loan Amount ($)</label>
-                        <input type="number" id="loan-amount" value="10000" min="0">
-                    </div>
-                    <div class="input-group">
-                        <label for="interest-rate">Interest Rate (%)</label>
-                        <input type="number" id="interest-rate" value="5" min="0" step="0.01">
-                    </div>
-                    <div class="input-group">
-                        <label for="loan-term">Loan Term (years)</label>
-                        <input type="number" id="loan-term" value="5" min="1">
-                    </div>
-                    <button id="calculate-loan">Calculate</button>
-                    <div class="result-group">
-                        <p>Monthly Payment: <span id="monthly-payment"></span></p>
-                        <p>Total Interest: <span id="total-interest"></span></p>
-                        <p>Total Payment: <span id="total-payment"></span></p>
-                    </div>
-                </div>
-
-                <div id="compound-calculator" class="financial-section">
-                    <h3>Compound Interest Calculator</h3>
-                    <div class="input-group">
-                        <label for="principal">Principal Amount ($)</label>
-                        <input type="number" id="principal" value="1000" min="0">
-                    </div>
-                    <div class="input-group">
-                        <label for="compound-rate">Annual Interest Rate (%)</label>
-                        <input type="number" id="compound-rate" value="5" min="0" step="0.01">
-                    </div>
-                    <div class="input-group">
-                        <label for="compound-years">Years</label>
-                        <input type="number" id="compound-years" value="10" min="0">
-                    </div>
-                    <div class="input-group">
-                        <label for="compound-frequency">Compounding Frequency</label>
-                        <select id="compound-frequency">
-                            <option value="1">Annually</option>
-                            <option value="2">Semi-annually</option>
-                            <option value="4">Quarterly</option>
-                            <option value="12" selected>Monthly</option>
-                            <option value="365">Daily</option>
-                        </select>
-                    </div>
-                    <button id="calculate-compound">Calculate</button>
-                    <div class="result-group">
-                        <p>Future Value: <span id="future-value"></span></p>
-                        <p>Total Interest: <span id="compound-interest"></span></p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div id="printing-calculator" class="calculator">
-            <div class="printing-display">
-                <div class="printing-tape" id="printing-tape"></div>
-                <div class="current-printing-value">0</div>
-            </div>
-            <div class="buttons">
-                <button data-action="clear">AC</button>
-                <button data-action="print-clear-tape">Clear Tape</button>
-                <button data-action="divide">/</button>
-                <button data-action="multiply">*</button>
-                <button data-action="number">7</button>
-                <button data-action="number">8</button>
-                <button data-action="number">9</button>
-                <button data-action="subtract">-</button>
-                <button data-action="number">4</button>
-                <button data-action="number">5</button>
-                <button data-action="number">6</button>
-                <button data-action="add">+</button>
-                <button data-action="number">1</button>
-                <button data-action="number">2</button>
-                <button data-action="number">3</button>
-                <button class="span-two" data-action="printing-equals">=</button>
-                <button data-action="number">0</button>
-                <button data-action="decimal">.</button>
-                <button data-action="print">Print</button>
-            </div>
-        </div>
-
-        <div id="online-calculator" class="calculator">
-            <div class="online-calculators-container">
-                <h3>Online Calculators</h3>
-                <div class="online-calculators-grid">
-                    <div class="online-calc-card">
-                        <h4>BMI Calculator</h4>
-                        <div class="input-group">
-                            <label for="bmi-weight">Weight (kg)</label>
-                            <input type="number" id="bmi-weight" min="0" step="0.1">
-                        </div>
-                        <div class="input-group">
-                            <label for="bmi-height">Height (cm)</label>
-                            <input type="number" id="bmi-height" min="0" step="0.1">
-                        </div>
-                        <button id="calculate-bmi">Calculate BMI</button>
-                        <div id="bmi-result"></div>
-                    </div>
-                    
-                    <div class="online-calc-card">
-                        <h4>Percentage Calculator</h4>
-                        <div class="input-group">
-                            <label for="percentage-value">What is</label>
-                            <input type="number" id="percentage-value" min="0" step="0.01">
-                        </div>
-                        <div class="input-group">
-                            <label for="percentage-of">% of</label>
-                            <input type="number" id="percentage-of" min="0" step="0.01">
-                        </div>
-                        <button id="calculate-percentage">Calculate</button>
-                        <div id="percentage-result"></div>
-                    </div>
-                    
-                    <div class="online-calc-card">
-                        <h4>Age Calculator</h4>
-                        <div class="input-group">
-                            <label for="birth-date">Birth Date</label>
-                            <input type="date" id="birth-date">
-                        </div>
-                        <button id="calculate-age">Calculate Age</button>
-                        <div id="age-result"></div>
-                    </div>
-                    
-                    <div class="online-calc-card">
-                        <h4>Tip Calculator</h4>
-                        <div class="input-group">
-                            <label for="bill-amount">Bill Amount ($)</label>
-                            <input type="number" id="bill-amount" min="0" step="0.01">
-                        </div>
-                        <div class="input-group">
-                            <label for="tip-percentage">Tip Percentage (%)</label>
-                            <input type="number" id="tip-percentage" value="15" min="0" max="100" step="0.1">
-                        </div>
-                        <button id="calculate-tip">Calculate Tip</button>
-                        <div id="tip-result"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    <footer>
+        <p>&copy; 2025 Your Company Name. All rights reserved.</p>
+    </footer>
 
     <script src="script.js"></script>
-</body>
+    </body>
 </html>
