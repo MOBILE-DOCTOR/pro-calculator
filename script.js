@@ -71,17 +71,14 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     document.getElementById('featureUniversalCalculator').addEventListener('click', () => {
-        // This links to your React app.
-        // Make sure this URL matches your GitHub Pages URL for the React app.
-        window.location.href = 'https://mobile-doctor.github.io/pro-calculator/my-download-app/';
+        // This links to your React app. UPDATED URL
+        window.location.href = 'https://mobile-doctor.github.io/mobiledoctor.store/my-download-app/';
     });
 
     // --- Download App Call to Action Button ---
     document.getElementById('downloadAppButton').addEventListener('click', () => {
-        // Redirect to the React app's main page.
-        // When the user lands on the React app, the browser can then prompt for PWA installation.
-        // IMPORTANT: Ensure this URL is correct for your React app's deployment path on GitHub Pages.
-        window.location.href = 'https://mobile-doctor.github.io/pro-calculator/my-download-app/'; 
+        // Redirect to the React app's main page. UPDATED URL
+        window.location.href = 'https://mobile-doctor.github.io/mobiledoctor.store/my-download-app/'; 
     });
 
     // Example of a general button or interactive element for demo purposes

@@ -5,17 +5,17 @@ const CACHE_NAME = 'my-app-cache-v1';
 // List of URLs to cache when the service worker is installed.
 // This should include all static assets that your app needs to function offline.
 // IMPORTANT: These paths are relative to the *root of the deployed PWA*.
-// For GitHub Pages: https://mobile-doctor.github.io/pro-calculator/my-download-app/
+// For GitHub Pages: https://mobile-doctor.github.io/mobiledoctor.store/my-download-app/
 // So, the actual path is relative to 'my-download-app/'
 const urlsToCache = [
-    '/pro-calculator/my-download-app/', // Root of your React app
-    '/pro-calculator/my-download-app/index.html',
+    '/mobiledoctor.store/my-download-app/', // Root of your React app
+    '/mobiledoctor.store/my-download-app/index.html',
     // Vite generates assets with hashes, so we'll rely on network-first for them
     // or you'd need to dynamically cache them. For simplicity, we cache the main entry.
     // The main JS/CSS bundles are typically loaded by index.html and handled by Vite's build output.
     // If you add icons to public/icons, include them here:
-    '/pro-calculator/my-download-app/icons/icon-192x192.png',
-    '/pro-calculator/my-download-app/icons/icon-512x512.png'
+    '/mobiledoctor.store/my-download-app/icons/icon-192x192.png',
+    '/mobiledoctor.store/my-download-app/icons/icon-512x512.png'
 ];
 
 // Install event: caches the static assets
