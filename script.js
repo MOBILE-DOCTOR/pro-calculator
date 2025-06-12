@@ -24,12 +24,20 @@ document.addEventListener('DOMContentLoaded', function() {
         });
 
         // Show the selected calculator section
-        document.getElementById(`${selectedMode}-calculator`).classList.add('display-block');
+        const targetCalculator = document.getElementById(`${selectedMode}-calculator`);
+        if (targetCalculator) {
+            targetCalculator.classList.add('display-block');
+        } else {
+            console.error(`Could not find element with ID: ${selectedMode}-calculator`); // Error log
+        }
+
 
         // Reset and re-setup the selected calculator
         resetCalculators(); // This clears all displays and specific calculator states
         if (calculatorSetups[selectedMode]) {
             calculatorSetups[selectedMode](); // Call the setup function for the active mode
+        } else {
+            console.warn(`No setup function found for mode: ${selectedMode}`); // Warning log
         }
 
         // Special setup for financial mode, as it has an internal mode selector
@@ -643,6 +651,12 @@ function setupCurrencyConverter() {
     };
 
     function convertCurrency() {
+        // Check if elements exist before accessing their values
+        if (!amountInput || !fromCurrencySelect || !toCurrencySelect || !convertedAmountDiv || !conversionRateDiv) {
+            console.error('One or more currency converter elements not found.');
+            return;
+        }
+
         const amount = parseFloat(amountInput.value);
         const fromCurrency = fromCurrencySelect.value;
         const toCurrency = toCurrencySelect.value;
@@ -672,6 +686,11 @@ function setupCurrencyConverter() {
     }
 
     function swapCurrencies() {
+        // Check if elements exist before accessing their values
+        if (!fromCurrencySelect || !toCurrencySelect) {
+            console.error('From/To currency selects not found for swapping.');
+            return;
+        }
         const temp = fromCurrencySelect.value;
         fromCurrencySelect.value = toCurrencySelect.value;
         toCurrencySelect.value = temp;
@@ -679,19 +698,20 @@ function setupCurrencyConverter() {
     }
 
     // Remove existing event listeners to prevent duplicates
-    convertButton.removeEventListener('click', convertCurrency);
-    swapCurrenciesButton.removeEventListener('click', swapCurrencies);
-    amountInput.removeEventListener('input', convertCurrency);
-    fromCurrencySelect.removeEventListener('change', convertCurrency);
-    toCurrencySelect.removeEventListener('change', convertCurrency);
+    // Ensure that these elements exist before attempting to remove/add listeners
+    if (convertButton) convertButton.removeEventListener('click', convertCurrency);
+    if (swapCurrenciesButton) swapCurrenciesButton.removeEventListener('click', swapCurrencies);
+    if (amountInput) amountInput.removeEventListener('input', convertCurrency);
+    if (fromCurrencySelect) fromCurrencySelect.removeEventListener('change', convertCurrency);
+    if (toCurrencySelect) toCurrencySelect.removeEventListener('change', convertCurrency);
 
 
     // Add new event listeners
-    convertButton.addEventListener('click', convertCurrency);
-    swapCurrenciesButton.addEventListener('click', swapCurrencies);
-    amountInput.addEventListener('input', convertCurrency);
-    fromCurrencySelect.addEventListener('change', convertCurrency);
-    toCurrencySelect.addEventListener('change', convertCurrency);
+    if (convertButton) convertButton.addEventListener('click', convertCurrency);
+    if (swapCurrenciesButton) swapCurrenciesButton.addEventListener('click', swapCurrencies);
+    if (amountInput) amountInput.addEventListener('input', convertCurrency);
+    if (fromCurrencySelect) fromCurrencySelect.addEventListener('change', convertCurrency);
+    if (toCurrencySelect) toCurrencySelect.addEventListener('change', convertCurrency);
 
     // Initial conversion on setup
     convertCurrency();
@@ -772,6 +792,12 @@ function setupUnitConverter() {
     };
 
     function populateUnitDropdowns() {
+        // Ensure dropdowns exist
+        if (!fromUnitTypeSelect || !fromUnitSelect || !toUnitSelect) {
+            console.error('Unit converter dropdowns not found.');
+            return;
+        }
+
         const selectedType = fromUnitTypeSelect.value;
         const typeUnits = units[selectedType];
 
@@ -806,6 +832,12 @@ function setupUnitConverter() {
     }
 
     function convertUnit() {
+        // Ensure all required elements exist
+        if (!unitValueInput || !fromUnitTypeSelect || !fromUnitSelect || !toUnitSelect || !convertedUnitValueDiv) {
+            console.error('One or more unit converter elements not found for conversion.');
+            return;
+        }
+
         const value = parseFloat(unitValueInput.value);
         const fromUnitType = fromUnitTypeSelect.value;
         const fromUnit = fromUnitSelect.value;
@@ -846,19 +878,19 @@ function setupUnitConverter() {
     }
 
     // Remove existing event listeners to prevent duplicates
-    fromUnitTypeSelect.removeEventListener('change', populateUnitDropdowns);
-    fromUnitSelect.removeEventListener('change', convertUnit);
-    toUnitSelect.removeEventListener('change', convertUnit);
-    unitValueInput.removeEventListener('input', convertUnit);
-    convertUnitButton.removeEventListener('click', convertUnit);
+    if (fromUnitTypeSelect) fromUnitTypeSelect.removeEventListener('change', populateUnitDropdowns);
+    if (fromUnitSelect) fromUnitSelect.removeEventListener('change', convertUnit);
+    if (toUnitSelect) toUnitSelect.removeEventListener('change', convertUnit);
+    if (unitValueInput) unitValueInput.removeEventListener('input', convertUnit);
+    if (convertUnitButton) convertUnitButton.removeEventListener('click', convertUnit);
 
 
     // Add new event listeners
-    fromUnitTypeSelect.addEventListener('change', populateUnitDropdowns);
-    fromUnitSelect.addEventListener('change', convertUnit);
-    toUnitSelect.addEventListener('change', convertUnit);
-    unitValueInput.addEventListener('input', convertUnit);
-    convertUnitButton.addEventListener('click', convertUnit);
+    if (fromUnitTypeSelect) fromUnitTypeSelect.addEventListener('change', populateUnitDropdowns);
+    if (fromUnitSelect) fromUnitSelect.addEventListener('change', convertUnit);
+    if (toUnitSelect) toUnitSelect.addEventListener('change', convertUnit);
+    if (unitValueInput) unitValueInput.addEventListener('input', convertUnit);
+    if (convertUnitButton) convertUnitButton.addEventListener('click', convertUnit);
 
     // Initial population and conversion
     populateUnitDropdowns();
@@ -866,7 +898,7 @@ function setupUnitConverter() {
 
 // Financial Calculator Implementation
 function setupFinancialCalculators() {
-    // Loan Calculator
+    // Loan Calculator elements
     const loanAmountInput = document.getElementById('loan-amount');
     const interestRateInput = document.getElementById('interest-rate');
     const loanTermInput = document.getElementById('loan-term');
@@ -876,6 +908,12 @@ function setupFinancialCalculators() {
     const totalPaymentSpan = document.getElementById('total-payment');
 
     function calculateLoan() {
+        // Ensure elements exist
+        if (!loanAmountInput || !interestRateInput || !loanTermInput || !monthlyPaymentSpan || !totalInterestSpan || !totalPaymentSpan) {
+            console.error('One or more loan calculator elements not found.');
+            return;
+        }
+
         const P = parseFloat(loanAmountInput.value); // Principal
         const R_annual = parseFloat(interestRateInput.value); // Annual interest rate
         const N = parseFloat(loanTermInput.value); // Loan term in years
@@ -906,18 +944,18 @@ function setupFinancialCalculators() {
     }
 
     // Remove existing event listeners to prevent duplicates
-    calculateLoanButton.removeEventListener('click', calculateLoan);
-    loanAmountInput.removeEventListener('input', calculateLoan);
-    interestRateInput.removeEventListener('input', calculateLoan);
-    loanTermInput.removeEventListener('input', calculateLoan);
+    if (calculateLoanButton) calculateLoanButton.removeEventListener('click', calculateLoan);
+    if (loanAmountInput) loanAmountInput.removeEventListener('input', calculateLoan);
+    if (interestRateInput) interestRateInput.removeEventListener('input', calculateLoan);
+    if (loanTermInput) loanTermInput.removeEventListener('input', calculateLoan);
 
     // Add new event listeners
-    calculateLoanButton.addEventListener('click', calculateLoan);
-    loanAmountInput.addEventListener('input', calculateLoan);
-    interestRateInput.addEventListener('input', calculateLoan);
-    loanTermInput.addEventListener('input', calculateLoan);
+    if (calculateLoanButton) calculateLoanButton.addEventListener('click', calculateLoan);
+    if (loanAmountInput) loanAmountInput.addEventListener('input', calculateLoan);
+    if (interestRateInput) interestRateInput.addEventListener('input', calculateLoan);
+    if (loanTermInput) loanTermInput.addEventListener('input', calculateLoan);
 
-    // Compound Interest Calculator
+    // Compound Interest Calculator elements
     const principalInput = document.getElementById('principal');
     const compoundRateInput = document.getElementById('compound-rate');
     const compoundYearsInput = document.getElementById('compound-years');
@@ -927,6 +965,12 @@ function setupFinancialCalculators() {
     const compoundInterestSpan = document.getElementById('compound-interest');
 
     function calculateCompoundInterest() {
+        // Ensure elements exist
+        if (!principalInput || !compoundRateInput || !compoundYearsInput || !compoundFrequencySelect || !futureValueSpan || !compoundInterestSpan) {
+            console.error('One or more compound interest calculator elements not found.');
+            return;
+        }
+
         const P = parseFloat(principalInput.value); // Principal
         const R_annual = parseFloat(compoundRateInput.value); // Annual interest rate
         const T = parseFloat(compoundYearsInput.value); // Years
@@ -948,19 +992,19 @@ function setupFinancialCalculators() {
     }
 
     // Remove existing event listeners to prevent duplicates
-    calculateCompoundButton.removeEventListener('click', calculateCompoundInterest);
-    principalInput.removeEventListener('input', calculateCompoundInterest);
-    compoundRateInput.removeEventListener('input', calculateCompoundInterest);
-    compoundYearsInput.removeEventListener('input', calculateCompoundInterest);
-    compoundFrequencySelect.removeEventListener('change', calculateCompoundInterest);
+    if (calculateCompoundButton) calculateCompoundButton.removeEventListener('click', calculateCompoundInterest);
+    if (principalInput) principalInput.removeEventListener('input', calculateCompoundInterest);
+    if (compoundRateInput) compoundRateInput.removeEventListener('input', calculateCompoundInterest);
+    if (compoundYearsInput) compoundYearsInput.removeEventListener('input', calculateCompoundInterest);
+    if (compoundFrequencySelect) compoundFrequencySelect.removeEventListener('change', calculateCompoundInterest);
 
 
     // Add new event listeners
-    calculateCompoundButton.addEventListener('click', calculateCompoundInterest);
-    principalInput.addEventListener('input', calculateCompoundInterest);
-    compoundRateInput.addEventListener('input', calculateCompoundInterest);
-    compoundYearsInput.addEventListener('input', calculateCompoundInterest);
-    compoundFrequencySelect.addEventListener('change', calculateCompoundInterest);
+    if (calculateCompoundButton) calculateCompoundButton.addEventListener('click', calculateCompoundInterest);
+    if (principalInput) principalInput.addEventListener('input', calculateCompoundInterest);
+    if (compoundRateInput) compoundRateInput.addEventListener('input', calculateCompoundInterest);
+    if (compoundYearsInput) compoundYearsInput.addEventListener('input', calculateCompoundInterest);
+    if (compoundFrequencySelect) compoundFrequencySelect.addEventListener('change', calculateCompoundInterest);
 
     // Initial calculations
     calculateLoan();
@@ -969,6 +1013,10 @@ function setupFinancialCalculators() {
 
 function switchFinancialMode() {
     const financialModeSelect = document.getElementById('financial-mode');
+    if (!financialModeSelect) {
+        console.error('Financial mode select dropdown not found.');
+        return;
+    }
     const selectedMode = financialModeSelect.value;
     const financialSections = document.querySelectorAll('.financial-section');
 
@@ -976,7 +1024,12 @@ function switchFinancialMode() {
         section.style.display = 'none';
     });
 
-    document.getElementById(`${selectedMode}-calculator`).style.display = 'block';
+    const targetSection = document.getElementById(`${selectedMode}-calculator`);
+    if (targetSection) {
+        targetSection.style.display = 'block';
+    } else {
+        console.error(`Financial section with ID: ${selectedMode}-calculator not found.`);
+    }
 }
 
 // Printing Calculator Implementation
@@ -993,13 +1046,17 @@ function setupPrintingCalculator() {
     let tapeContent = '';
 
     function updateDisplay() {
-        currentPrintingValueElement.textContent = currentOperand;
+        if (currentPrintingValueElement) {
+            currentPrintingValueElement.textContent = currentOperand;
+        }
     }
 
     function appendToTape(entry) {
-        tapeContent += entry + '\n';
-        printingTape.textContent = tapeContent;
-        printingTape.scrollTop = printingTape.scrollHeight; // Scroll to bottom
+        if (printingTape) {
+            tapeContent += entry + '\n';
+            printingTape.textContent = tapeContent;
+            printingTape.scrollTop = printingTape.scrollHeight; // Scroll to bottom
+        }
     }
 
     function appendNumber(number) {
@@ -1022,11 +1079,11 @@ function setupPrintingCalculator() {
     }
 
     function compute() {
-        let computation;
         const prev = parseFloat(previousOperand);
         const current = parseFloat(currentOperand);
         if (isNaN(prev) || isNaN(current)) return;
 
+        let computation;
         let symbol = '';
         switch (operation) {
             case '+':
@@ -1066,7 +1123,9 @@ function setupPrintingCalculator() {
 
     function clearTape() {
         tapeContent = '';
-        printingTape.textContent = '';
+        if (printingTape) {
+            printingTape.textContent = '';
+        }
     }
 
     function addDecimalPoint() {
@@ -1131,6 +1190,11 @@ function setupOnlineCalculators() {
     const bmiResultDiv = document.getElementById('bmi-result');
 
     function calculateBMI() {
+        // Ensure elements exist
+        if (!bmiWeightInput || !bmiHeightInput || !bmiResultDiv) {
+            console.error('One or more BMI calculator elements not found.');
+            return;
+        }
         const weight = parseFloat(bmiWeightInput.value); // kg
         const height = parseFloat(bmiHeightInput.value); // cm
 
@@ -1157,14 +1221,14 @@ function setupOnlineCalculators() {
     }
 
     // Remove existing event listeners to prevent duplicates
-    calculateBmiButton.removeEventListener('click', calculateBMI);
-    bmiWeightInput.removeEventListener('input', calculateBMI);
-    bmiHeightInput.removeEventListener('input', calculateBMI);
+    if (calculateBmiButton) calculateBmiButton.removeEventListener('click', calculateBMI);
+    if (bmiWeightInput) bmiWeightInput.removeEventListener('input', calculateBMI);
+    if (bmiHeightInput) bmiHeightInput.removeEventListener('input', calculateBMI);
 
     // Add new event listeners
-    calculateBmiButton.addEventListener('click', calculateBMI);
-    bmiWeightInput.addEventListener('input', calculateBMI);
-    bmiHeightInput.addEventListener('input', calculateBMI);
+    if (calculateBmiButton) calculateBmiButton.addEventListener('click', calculateBMI);
+    if (bmiWeightInput) bmiWeightInput.addEventListener('input', calculateBMI);
+    if (bmiHeightInput) bmiHeightInput.addEventListener('input', calculateBMI);
 
 
     // Percentage Calculator
@@ -1174,6 +1238,11 @@ function setupOnlineCalculators() {
     const percentageResultDiv = document.getElementById('percentage-result');
 
     function calculatePercentage() {
+        // Ensure elements exist
+        if (!percentageValueInput || !percentageOfInput || !percentageResultDiv) {
+            console.error('One or more percentage calculator elements not found.');
+            return;
+        }
         const value = parseFloat(percentageValueInput.value);
         const of = parseFloat(percentageOfInput.value);
 
@@ -1187,22 +1256,27 @@ function setupOnlineCalculators() {
     }
 
     // Remove existing event listeners to prevent duplicates
-    calculatePercentageButton.removeEventListener('click', calculatePercentage);
-    percentageValueInput.removeEventListener('input', calculatePercentage);
-    percentageOfInput.removeEventListener('input', calculatePercentage);
+    if (calculatePercentageButton) calculatePercentageButton.removeEventListener('click', calculatePercentage);
+    if (percentageValueInput) percentageValueInput.removeEventListener('input', calculatePercentage);
+    if (percentageOfInput) percentageOfInput.removeEventListener('input', calculatePercentage);
 
     // Add new event listeners
-    calculatePercentageButton.addEventListener('click', calculatePercentage);
-    percentageValueInput.addEventListener('input', calculatePercentage);
-    percentageOfInput.addEventListener('input', calculatePercentage);
+    if (calculatePercentageButton) calculatePercentageButton.addEventListener('click', calculatePercentage);
+    if (percentageValueInput) percentageValueInput.addEventListener('input', calculatePercentage);
+    if (percentageOfInput) percentageOfInput.addEventListener('input', calculatePercentage);
 
 
     // Age Calculator
     const birthDateInput = document.getElementById('birth-date');
     const calculateAgeButton = document.getElementById('calculate-age');
-    const ageResultDiv = document = document.getElementById('age-result');
+    const ageResultDiv = document.getElementById('age-result');
 
     function calculateAge() {
+        // Ensure elements exist
+        if (!birthDateInput || !ageResultDiv) {
+            console.error('One or more age calculator elements not found.');
+            return;
+        }
         const birthDate = new Date(birthDateInput.value);
         if (isNaN(birthDate.getTime())) {
             ageResultDiv.textContent = 'Please enter a valid birth date.';
@@ -1221,12 +1295,12 @@ function setupOnlineCalculators() {
     }
 
     // Remove existing event listeners to prevent duplicates
-    calculateAgeButton.removeEventListener('click', calculateAge);
-    birthDateInput.removeEventListener('change', calculateAge);
+    if (calculateAgeButton) calculateAgeButton.removeEventListener('click', calculateAge);
+    if (birthDateInput) birthDateInput.removeEventListener('change', calculateAge);
 
     // Add new event listeners
-    calculateAgeButton.addEventListener('click', calculateAge);
-    birthDateInput.addEventListener('change', calculateAge);
+    if (calculateAgeButton) calculateAgeButton.addEventListener('click', calculateAge);
+    if (birthDateInput) birthDateInput.addEventListener('change', calculateAge);
 
 
     // Tip Calculator
@@ -1236,6 +1310,11 @@ function setupOnlineCalculators() {
     const tipResultDiv = document.getElementById('tip-result');
 
     function calculateTip() {
+        // Ensure elements exist
+        if (!billAmountInput || !tipPercentageInput || !tipResultDiv) {
+            console.error('One or more tip calculator elements not found.');
+            return;
+        }
         const billAmount = parseFloat(billAmountInput.value);
         const tipPercentage = parseFloat(tipPercentageInput.value);
 
@@ -1251,12 +1330,12 @@ function setupOnlineCalculators() {
     }
 
     // Remove existing event listeners to prevent duplicates
-    calculateTipButton.removeEventListener('click', calculateTip);
-    billAmountInput.removeEventListener('input', calculateTip);
-    tipPercentageInput.removeEventListener('input', calculateTip);
+    if (calculateTipButton) calculateTipButton.removeEventListener('click', calculateTip);
+    if (billAmountInput) billAmountInput.removeEventListener('input', calculateTip);
+    if (tipPercentageInput) tipPercentageInput.removeEventListener('input', calculateTip);
 
     // Add new event listeners
-    calculateTipButton.addEventListener('click', calculateTip);
-    billAmountInput.addEventListener('input', calculateTip);
-    tipPercentageInput.addEventListener('input', calculateTip);
+    if (calculateTipButton) calculateTipButton.addEventListener('click', calculateTip);
+    if (billAmountInput) billAmountInput.addEventListener('input', calculateTip);
+    if (tipPercentageInput) tipPercentageInput.addEventListener('input', calculateTip);
 }
