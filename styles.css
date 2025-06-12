@@ -38,18 +38,24 @@ nav ul {
     gap: 20px; /* Space between nav items */
 }
 
-nav a {
+/* NEW: Nav Button Styling */
+.nav-button {
+    background-color: #555;
     color: #fff;
-    text-decoration: none;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
     font-weight: bold;
-    padding: 0.5rem 1rem;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
 }
 
-nav a:hover,
-nav a:focus {
-    background-color: #555;
+.nav-button:hover,
+.nav-button:focus {
+    background-color: #007bff; /* Primary blue on hover */
+    transform: translateY(-2px);
 }
 
 /* Main Content Styling */
@@ -64,12 +70,13 @@ main {
 
 /* Section Styling */
 section {
-    padding: 40px 0;
+    padding: 40px 20px; /* Added horizontal padding */
     text-align: center;
+    margin-bottom: 30px; /* Space between sections */
 }
 
-section:nth-of-type(even) {
-    background-color: #f9f9f9; /* Light background for alternating sections */
+section:nth-of-type(odd) { /* Apply light background to odd sections */
+    background-color: #f9f9f9;
 }
 
 section h2 {
@@ -98,58 +105,7 @@ section h3 {
     margin: 0 auto 20px;
 }
 
-#hero button {
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    padding: 12px 25px;
-    font-size: 1rem;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-}
-
-#hero button:hover {
-    background-color: #0056b3;
-    transform: translateY(-2px);
-}
-
-/* Features Section Specifics */
-.feature-list {
-    display: flex;
-    flex-wrap: wrap; /* Allow items to wrap on smaller screens */
-    justify-content: center;
-    gap: 30px; /* Space between feature items */
-    margin-top: 30px;
-}
-
-.feature-item {
-    background-color: #fff;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 25px;
-    width: 100%; /* Full width on small screens */
-    max-width: 300px; /* Max width on larger screens */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-    transition: transform 0.2s ease;
-}
-
-.feature-item:hover {
-    transform: translateY(-5px);
-}
-
-.feature-item h4 {
-    color: #007bff;
-    font-size: 1.5rem;
-    margin-top: 0;
-}
-
-.feature-item p {
-    font-size: 0.95rem;
-    color: #555;
-}
-
-/* NEW: CTA Button Styling */
+/* Common CTA Button Styling (used by Hero and Download App) */
 .cta-button {
     background-color: #007bff; /* Primary blue for CTA */
     color: #fff;
@@ -167,6 +123,106 @@ section h3 {
     background-color: #0056b3; /* Darker blue on hover */
     transform: translateY(-3px); /* Lift effect */
     box-shadow: 0 8px 20px rgba(0, 123, 255, 0.4); /* Enhanced shadow */
+}
+
+/* NEW: Service List Styling */
+.service-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+    margin-top: 30px;
+    justify-items: center;
+}
+
+.service-item {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 25px;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease;
+    text-align: left; /* Align text left within service item */
+    width: 100%; /* Ensure it fills grid column */
+    max-width: 350px; /* Max width for single item */
+}
+
+.service-item:hover {
+    transform: translateY(-5px);
+}
+
+.service-item h4 {
+    color: #0056b3; /* Darker blue for service titles */
+    font-size: 1.4rem;
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+.service-item p {
+    font-size: 0.95rem;
+    color: #555;
+    line-height: 1.5;
+}
+
+
+/* Feature List Styling (similar to service-list but with feature-button) */
+#features-tools .feature-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px; /* Space between feature items */
+    margin-top: 30px;
+    justify-items: center;
+}
+
+.feature-item {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 25px;
+    width: 100%; /* Full width on small screens */
+    max-width: 300px; /* Max width on larger screens */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s ease;
+    display: flex; /* Use flexbox for internal layout */
+    flex-direction: column;
+    justify-content: space-between; /* Push button to bottom */
+}
+
+.feature-item:hover {
+    transform: translateY(-5px);
+}
+
+.feature-item h4 {
+    color: #007bff;
+    font-size: 1.5rem;
+    margin-top: 0;
+}
+
+.feature-item p {
+    font-size: 0.95rem;
+    color: #555;
+    flex-grow: 1; /* Allow description to take available space */
+    margin-bottom: 20px; /* Space before button */
+}
+
+/* NEW: Feature Button Styling */
+.feature-button {
+    background-color: #28a745; /* Green for features */
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 3px 8px rgba(0, 128, 0, 0.2);
+    width: 100%; /* Make button full width within item */
+}
+
+.feature-button:hover {
+    background-color: #218838; /* Darker green on hover */
+    transform: translateY(-2px);
+    box-shadow: 0 5px 12px rgba(0, 128, 0, 0.3);
 }
 
 
@@ -191,7 +247,11 @@ footer {
         gap: 10px;
     }
 
-    .feature-item {
+    .nav-button {
+        padding: 0.6rem 1.2rem;
+    }
+
+    .feature-item, .service-item {
         max-width: 90%; /* Adjust width for better fit on tablets */
     }
 
@@ -208,7 +268,7 @@ footer {
     }
 
     section {
-        padding: 30px 0;
+        padding: 30px 15px; /* Adjust horizontal padding */
     }
 
     header h1 {
@@ -219,8 +279,13 @@ footer {
         padding: 40px 15px;
     }
 
-    .feature-list {
-        flex-direction: column;
+    .service-list, .feature-list {
+        grid-template-columns: 1fr; /* Stack items vertically on mobile */
         align-items: center;
+    }
+
+    .feature-item, .service-item {
+        width: 100%;
+        max-width: 95%; /* Make them almost full width */
     }
 }

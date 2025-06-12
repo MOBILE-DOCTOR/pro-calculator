@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Awesome Site</title>
+    <title>Mobile Doctor - Your Tech Solution</title>
     <!-- Link to your main stylesheet -->
     <link rel="stylesheet" href="styles.css">
     
@@ -12,25 +12,87 @@
 </head>
 <body>
     <header>
-        <h1>Welcome to My Site!</h1>
+        <h1>Mobile Doctor</h1>
         <nav>
             <ul>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">About</a></li>
-                <li><a href="#">Services</a></li>
-                <li><a href="#">Contact</a></li>
+                <li><button class="nav-button" id="navHome">Home</button></li>
+                <li><button class="nav-button" id="navAbout">About Us</button></li>
+                <li><button class="nav-button" id="navServices">Services</button></li>
+                <li><button class="nav-button" id="navContact">Contact Us</button></li>
             </ul>
         </nav>
     </header>
 
     <main>
         <section id="hero">
-            <h2>Discover What We Offer</h2>
-            <p>This is the main content area of your traditional website. Users will see this after dismissing the app download prompt (if they navigate here from the app) or directly.</p>
-            <button id="learnMoreBtn">Learn More</button>
+            <h2>Your One-Stop Solution for Mobile Repair & Utilities!</h2>
+            <p>At Mobile Doctor, we provide expert repair services for all your mobile devices and offer a suite of useful online tools to simplify your digital life.</p>
+            <button id="exploreServicesBtn" class="cta-button">Explore Our Services</button>
         </section>
 
-        <!-- NEW SECTION: Download App Call to Action -->
+        <!-- NEW SECTION: About Mobile Doctor Shop -->
+        <section id="about-us">
+            <h2>About Mobile Doctor Shop</h2>
+            <p>Welcome to Mobile Doctor, your trusted partner for all mobile-related needs! We specialize in professional mobile repair services, ranging from screen replacements and battery issues to complex software diagnostics and data recovery. Our skilled technicians are dedicated to providing quick, reliable, and affordable solutions to get your devices back in perfect working order. Beyond repairs, we also offer a variety of essential mobile accessories and provide expert advice to help you make the most of your technology. Your satisfaction is our priority, and we strive to deliver exceptional service with every interaction.</p>
+            <button id="learnMoreAboutUsBtn" class="cta-button">Learn More About Us</button>
+        </section>
+
+        <!-- NEW SECTION: Our Services -->
+        <section id="our-services">
+            <h2>Our Services</h2>
+            <div class="service-list">
+                <div class="service-item">
+                    <h4>Screen Repair & Replacement</h4>
+                    <p>Cracked screen? We fix it swiftly with high-quality parts.</p>
+                </div>
+                <div class="service-item">
+                    <h4>Battery Replacement</h4>
+                    <p>Is your phone dying too fast? Get a new battery installed.</p>
+                </div>
+                <div class="service-item">
+                    <h4>Software Troubleshooting</h4>
+                    <p>Solving software glitches, updates, and performance issues.</p>
+                </div>
+                <div class="service-item">
+                    <h4>Water Damage Repair</h4>
+                    <p>Expert recovery for water-damaged devices.</p>
+                </div>
+                <div class="service-item">
+                    <h4>Data Recovery</h4>
+                    <p>Helping you retrieve lost data from damaged phones.</p>
+                </div>
+                <div class="service-item">
+                    <h4>Accessory Sales</h4>
+                    <p>Find chargers, cases, screen protectors, and more.</p>
+                </div>
+            </div>
+            <button id="viewAllServicesBtn" class="cta-button">View All Services</button>
+        </section>
+
+        <!-- Updated Feature Section -->
+        <section id="features-tools">
+            <h2>Our Convenient Online Tools</h2>
+            <p>Beyond repairs, enhance your digital experience with our free, easy-to-use online utilities.</p>
+            <div class="feature-list">
+                <div class="feature-item">
+                    <h4>File Converter Tool</h4>
+                    <p>Convert documents, images, and other files with ease online.</p>
+                    <button id="featureFileConverter" class="feature-button">Use Tool</button>
+                </div>
+                <div class="feature-item">
+                    <h4>Age Calculator</h4>
+                    <p>Quickly calculate age from a given date of birth.</p>
+                    <button id="featureAgeCalculator" class="feature-button">Use Tool</button>
+                </div>
+                <div class="feature-item">
+                    <h4>Universal Calculator</h4>
+                    <p>Perform various calculations with our versatile tool.</p>
+                    <button id="featureUniversalCalculator" class="feature-button">Use Tool</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Previous Download App Call to Action -->
         <section id="download-app-cta" class="bg-blue-100 text-center py-10 rounded-lg shadow-md mt-8">
             <h2 class="text-3xl font-bold text-blue-800 mb-4">Ready for the Full Experience?</h2>
             <p class="text-lg text-blue-700 mb-6">Install our dedicated mobile app for offline access and more features!</p>
@@ -38,32 +100,12 @@
                 Download Our App!
             </button>
         </section>
-        <!-- END NEW SECTION -->
-
-        <section id="features">
-            <h3>Key Features</h3>
-            <div class="feature-list">
-                <div class="feature-item">
-                    <h4>Feature 1</h4>
-                    <p>Description of feature 1.</p>
-                </div>
-                <div class="feature-item">
-                    <h4>Feature 2</h4>
-                    <p>Description of feature 2.</p>
-                </div>
-                <div class="feature-item">
-                    <h4>Feature 3</h4>
-                    <p>Description of feature 3.</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Add more sections with your site's content here -->
+        <!-- END Download App Call to Action -->
 
     </main>
 
     <footer>
-        <p>&copy; 2025 Your Company Name. All rights reserved.</p>
+        <p>&copy; 2025 Mobile Doctor. All rights reserved.</p>
     </footer>
 
     <!-- Link to your main JavaScript file -->
