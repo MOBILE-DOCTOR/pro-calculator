@@ -16,15 +16,15 @@ const App = () => {
     // State to store the userId for Firebase authentication
     const [userId, setUserId] = useState(null);
 
-    // State to hold Firebase instances once initialized
+    // State to hold Firebase instances once initialized and ready
     const [firebaseReady, setFirebaseReady] = useState(false);
-    const [db, setDb] = useState(null); // Placeholder for Firestore if you expand later
+    // const [db, setDb] = useState(null); // Placeholder for Firestore if you expand later
     const [auth, setAuth] = useState(null);
 
     // Effect for Firebase Initialization and Authentication
     useEffect(() => {
         // Retrieve Firebase configuration and app ID from global variables.
-        // These are provided by the Canvas environment.
+        // These are provided by the Canvas environment during development.
         const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
         const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : {};
 
@@ -38,7 +38,7 @@ const App = () => {
             setFirebaseReady(true); // Mark Firebase as initialized
 
             // Authenticate the user using the custom token provided by the environment.
-            // If the token is not defined, sign in anonymously.
+            // If the token is not defined (e.g., in a local build outside Canvas), sign in anonymously.
             const authenticate = async () => {
                 if (typeof __initial_auth_token !== 'undefined') {
                     await signInWithCustomToken(firebaseAuth, __initial_auth_token)
@@ -70,7 +70,7 @@ const App = () => {
                 }
             });
 
-            // Cleanup subscription on component unmount
+            // Cleanup subscription on component unmount to prevent memory leaks
             return () => unsubscribe();
 
         } catch (e) {
@@ -78,20 +78,19 @@ const App = () => {
         }
     }, []); // Empty dependency array ensures this effect runs only once on component mount
 
-    // Effect to check for first-time visit and show prompt
+    // Effect to check for first-time visit and show prompt, dependent on Firebase being ready
     useEffect(() => {
-        // Only proceed if Firebase (and thus localStorage) is ready
         if (firebaseReady) {
             // Check if the user has visited before or dismissed the prompt using localStorage.
             const hasVisited = localStorage.getItem('hasVisitedApp');
             if (!hasVisited) {
-                // If it's a first-time visit, show the prompt after a short delay.
+                // If it's a first-time visit, show the prompt after a short delay for better UX.
                 setTimeout(() => {
                     setShowPrompt(true);
                 }, 1000); // 1-second delay
             }
         }
-    }, [firebaseReady]); // Depend on firebaseReady state
+    }, [firebaseReady]); // This effect re-runs when 'firebaseReady' state changes
 
     // Function to handle dismissing the prompt and redirecting to index.html
     const handleContinueToSite = () => {
@@ -102,6 +101,9 @@ const App = () => {
 
     // Function to handle the "Download App" action
     const handleDownloadApp = () => {
+        // This is a placeholder for actual PWA installation logic.
+        // In a real PWA, the browser prompts the user to "Add to Home Screen" or "Install"
+        // based on your manifest.json and service worker. This merely simulates it.
         alert("Simulating app installation! The React app you are currently viewing is designed to be installable.");
         setShowPrompt(false); // Hide the prompt
         localStorage.setItem('hasVisitedApp', 'true'); // Set a flag so the prompt doesn't reappear

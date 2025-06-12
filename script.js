@@ -5,14 +5,15 @@
 document.addEventListener('DOMContentLoaded', () => {
     console.log('index.html script loaded and DOM is ready!');
 
-    // Example: Add an event listener to the "Learn More" button in the Hero section.
-    const learnMoreButton = document.querySelector('#hero button');
+    // Example: Add an event listener to the the "Learn More" button in the Hero section.
+    // The ID 'learnMoreBtn' was added to the button in the latest index.html.
+    const learnMoreButton = document.getElementById('learnMoreBtn');
 
     if (learnMoreButton) {
         learnMoreButton.addEventListener('click', () => {
             // In a real scenario, you might scroll to a section, load more content,
             // or navigate to another page.
-            // Using a simple message here instead of alert() as per instructions.
+            // Using a simple message box here instead of alert() as per instructions.
             displayMessage('You clicked the "Learn More" button!');
         });
     }
@@ -44,15 +45,15 @@ document.addEventListener('DOMContentLoaded', () => {
             // Basic styling for the message box
             messageBox.style.position = 'fixed';
             messageBox.style.bottom = '20px';
-            messageBox.right = '20px';
-            messageBox.backgroundColor = '#4CAF50';
-            messageBox.color = 'white';
-            messageBox.padding = '15px 20px';
-            messageBox.borderRadius = '8px';
-            messageBox.boxShadow = '0 4px 8px rgba(0, 0, 0, 0.2)';
-            messageBox.zIndex = '1000';
-            messageBox.opacity = '0';
-            messageBox.transition = 'opacity 0.5s ease-in-out';
+            messageBox.style.right = '20px';
+            messageBox.style.backgroundColor = '#4CAF50';
+            messageBox.style.color = 'white';
+            messageBox.style.padding = '15px 20px';
+            messageBox.style.borderRadius = '8px';
+            messageBox.style.boxShadow = '0 4px 8px rgba(0, 0, 0, 0.2)';
+            messageBox.style.zIndex = '1000';
+            messageBox.style.opacity = '0';
+            messageBox.style.transition = 'opacity 0.5s ease-in-out';
         }
 
         messageBox.textContent = messageText;
